@@ -23,12 +23,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var intensity: UISlider!
     @IBOutlet var radius: UISlider!
     @IBOutlet var scale: UISlider!
-    var currentImage: UIImage!
-    
     @IBOutlet var changeFilterButton: UIButton!
+    
+    var currentImage: UIImage!
     var context: CIContext!
     var currentFilter: CIFilter!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -55,6 +56,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // Setting currentImage as the input image for the currentFilter.
         let beginImage = CIImage(image: currentImage)
+        
+        imageView.alpha = 0
+        UIView.animate(withDuration: 2, delay: 0, options: [], animations: {
+            self.imageView.alpha = 1
+        })
+        
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         applyProcessing()
     }
@@ -88,6 +95,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        
+        imageView.alpha = 0
+        UIView.animate(withDuration: 2, delay: 0, options: [], animations: {
+            self.imageView.alpha = 1
+        })
         
         applyProcessing()
     }
